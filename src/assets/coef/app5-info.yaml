@@ -1,0 +1,43 @@
+ue:
+  - name: l'entreprise et son environement III
+    modules:
+      - name: Management opt 1
+        coef: 4
+      - name: Management opt 2
+        coef: 4
+  - name: langue et communication III
+    modules:
+      - name: Anglais
+        coef: 6
+      - name: PPP
+        coef: 3
+  - name: Algorithmique
+    modules:
+      - name: Dévelopement Web avancé
+        coef: 3
+      - name: IA et résolution contraintes
+        coef: 4
+  - name: Analyse des Systèmes et des données
+    modules:
+      - name: Architecture orienté services
+        coef: 6
+      - name: Modélisation et Vérification
+        coef: 5
+      - name: Apprentissage automatique et données massives
+        coef: 4
+  - name: Ingéniery
+    modules:
+      - name: Réalité virtuelle et intéraction
+        coef: 4
+      - name: Programmation générique en c++
+        coef: 5
+      - name: Représentation et échange de données
+        coef: 6
+  - name: Ingéniery
+    modules:
+      - name: Système informatique et Web sémentique
+        coef: 4
+      - name: Graphique et visualisation
+        coef: 4
+      - name: Traitement d'image
+        coef: 2
