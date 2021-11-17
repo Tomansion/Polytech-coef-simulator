@@ -1,11 +1,11 @@
 ue:
-  - name: l'entreprise et son environement III
+  - name: L'entreprise et son environement III
     modules:
       - name: Management opt 1
         coef: 4
       - name: Management opt 2
         coef: 4
-  - name: langue et communication III
+  - name: Langue et communication III
     modules:
       - name: Anglais
         coef: 6
@@ -25,7 +25,7 @@ ue:
         coef: 5
       - name: Apprentissage automatique et données massives
         coef: 4
-  - name: Ingéniery
+  - name: Ingénierie
     modules:
       - name: Réalité virtuelle et intéraction
         coef: 4
@@ -33,7 +33,7 @@ ue:
         coef: 5
       - name: Représentation et échange de données
         coef: 6
-  - name: Ingéniery
+  - name: Modules d'ouvertures
     modules:
       - name: Système informatique et Web sémentique
         coef: 4

@@ -1,32 +1,25 @@
 <template>
   <div id="app">
-    <div>
-      <b-card title="Card Title" style="max-width: 40rem">
-        <b-card-text>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </b-card-text>
-
-        <b-button href="#" variant="primary">Go somewhere</b-button>
-      </b-card>
-    </div>
+    <UE v-for="UE in UeList" :key="UE.name" :UE="UE" />
   </div>
 </template>
 
 <script>
-import UE from "@/assets/coef/app5-info.yaml"; // gets modules coef from yaml file
+import coef_config from "@/assets/coef/app5-info.yaml"; // gets modules coef from yaml file
+import UE from "./components/UE.vue";
 
 export default {
   name: "App",
-  components: {},
+  components: { UE },
   data() {
     return {
-      ue: null,
+      UeList: null,
     };
   },
   created() {
     // Read the UE yml in the assets
-    console.log(UE);
+    console.log(coef_config.ue);
+    this.UeList = coef_config.ue;
   },
 };
 </script>
