@@ -1,6 +1,6 @@
 <template>
-  <div class="UE">
-    <b-card :header="UE.name">
+  <div :class="'UE ' + (pass ? 'pass' : 'fail')">
+    <b-card :header="UE.name + ' ' + (pass ? '' : '(fail)')">
       <!-- Modules repartition -->
       <b-card-text class="moduleRep">
         <div
@@ -14,14 +14,14 @@
           "
           class="module"
         >
-          {{ module.name }} : {{ module.coef }} ({{
+          {{ module.name }} : Coef {{ module.coef }} ({{
             Math.round((module.coef / totalCoef) * 100)
           }}%)
         </div>
-        <div class="totalCoef">Total coef : {{ totalCoef }}</div>
+        <!-- <div class="totalCoef">Total coef : {{ totalCoef }}</div> -->
       </b-card-text>
       <!-- Grades repartition -->
-      <b-card-text class="moduleRep" v-if="grades">
+      <b-card-text class="moduleRep">
         <div
           v-for="module in UE.modules"
           :key="module.name"
@@ -33,12 +33,35 @@
           "
           class="module"
         >
-          {{ module.name }} : {{ grades[module.name] }} / 20
+          {{ module.name }}
+          <!-- : {{ grades[module.name] }} / 20 -->
         </div>
-        <div class="totalCoef">Grade : {{ totalGrade }} / {{ maxGrade }}</div>
       </b-card-text>
       <!-- Grades input -->
-      <!-- TODO -->
+      <b-card-text style="display: flex">
+        My grades :
+        <div class="gradeInputs">
+          <div
+            v-for="module in UE.modules"
+            :key="module.name"
+            class="moduleGradeInput"
+          >
+            {{ module.name }} :
+            <input
+              type="number"
+              v-model="grades[module.name]"
+              @input="update"
+              max="20"
+              min="0"
+            />
+            / 20
+          </div>
+        </div>
+        <div class="totalCoef">
+          Grade :
+          {{ (Math.round((totalGrade / maxGrade) * 200) / 10).toFixed(2) }} / 20
+        </div>
+      </b-card-text>
     </b-card>
   </div>
 </template>
@@ -56,6 +79,7 @@ export default {
     return {
       totalCoef: null,
       maxGrade: null,
+      totalGrade: 0,
       grades: {},
     };
   },
@@ -64,12 +88,14 @@ export default {
       (total, module) => module.coef + total,
       0
     );
-    this.maxGrade = this.UE.modules.length * 20;
+    this.maxGrade = 20 * this.totalCoef;
 
     // Set all the grades to 20
     this.UE.modules.map((module) => {
       this.grades[module.name] = 20;
     });
+
+    this.calculateGrade();
   },
   methods: {
     getColorByCoef(coef) {
@@ -85,15 +111,22 @@ export default {
       ];
       return colors[(coef + 1) % colors.length];
     },
+    update() {
+      this.calculateGrade();
+    },
+    calculateGrade() {
+      this.totalGrade = Object.keys(this.grades).reduce(
+        (total, moduleName) =>
+          parseInt(this.grades[moduleName]) *
+            this.UE.modules.find((module) => module.name === moduleName).coef +
+          total,
+        0
+      );
+    },
   },
   computed: {
-    totalGrade() {
-      if (this.grades)
-        return Object.values(this.grades).reduce(
-          (total, grade) => grade + total,
-          0
-        );
-      return 0;
+    pass() {
+      return this.totalGrade >= this.maxGrade / 2;
     },
   },
 };
@@ -103,23 +136,38 @@ export default {
 .UE {
   margin: 10px;
 }
+.pass {
+  color: rgb(0, 68, 90);
+}
+.UE.fail {
+  color: rgb(158, 0, 0);
+}
 .moduleRep {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   height: 60px;
 }
 .module {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 1px;
-  padding: 5px;
   border: solid 1px #ccc;
+  overflow: hidden;
+  transition: width 0.5s;
 }
 .totalCoef {
   padding: 5px;
   white-space: nowrap;
   display: flex;
   align-items: center;
+}
+
+.gradeInputs {
+  flex: 1;
+  display: flex;
+  justify-content: space-evenly;
+}
+.moduleGradeInput input {
+  width: 70px;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <UE v-for="UE in UeList" :key="UE.name" :UE="UE" />
+    <UE v-for="UE in UeList" :key="UE.name" :UE="UE"/>
   </div>
 </template>
 
