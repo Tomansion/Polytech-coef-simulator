@@ -12,11 +12,18 @@
       :UE="UE"
       @gradeUpdate="gradeUpdate"
     />
+    <b-card header="Source code">
+      <b-card-text>
+        Check the Github page :
+        <a href="https://github.com/Tomansion/Polytech-coef-simulator">https://github.com/Tomansion/Polytech-coef-simulator</a>
+        </b-card-text
+      >
+    </b-card>
   </div>
 </template>
 
 <script>
-import coef_config from "@/assets/coef/app5-info.yaml"; // gets modules coef from yaml file
+import coef_config from "@/assets/coef.yaml"; // gets modules coef from yaml file
 import UE from "./components/UE.vue";
 
 export default {
@@ -26,7 +33,7 @@ export default {
     return {
       UeList: null,
       totalGrade: 20,
-      totalCoef: null
+      totalCoef: null,
     };
   },
   created() {
@@ -42,10 +49,7 @@ export default {
       ue.grade = 20 * ue.totalCoef;
     });
 
-    this.totalCoef = this.UeList.reduce(
-      (total, ue) => ue.totalCoef + total,
-      0
-    );
+    this.totalCoef = this.UeList.reduce((total, ue) => ue.totalCoef + total, 0);
   },
   methods: {
     gradeUpdate({ UE, grade }) {
@@ -58,9 +62,9 @@ export default {
       // Calculate the total grade
       let totalGrade = 0;
       for (let UE of this.UeList) {
-        totalGrade += UE.grade ;
+        totalGrade += UE.grade;
       }
-      this.totalGrade =  (totalGrade / this.totalCoef).toFixed(2);
+      this.totalGrade = (totalGrade / this.totalCoef).toFixed(2);
     },
   },
 };
