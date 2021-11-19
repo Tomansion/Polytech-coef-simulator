@@ -34,6 +34,9 @@
         >
           {{ module.name }}
         </div>
+        <!-- A red line at the center of the repartition -->
+        <span class="redLine"></span>
+        <span class="orangeLine"></span>
       </b-card-text>
       <!-- Grades input -->
       <b-card-text style="display: flex">
@@ -136,6 +139,7 @@ export default {
 <style scoped>
 .UE {
   margin: 10px;
+  transition: color 1s;
 }
 .pass {
   color: rgb(0, 68, 90);
@@ -146,6 +150,20 @@ export default {
 .moduleRep {
   display: flex;
   justify-content: flex-end;
+  height: 60px;
+}
+.redLine {
+  position: absolute;
+  left: 50%;
+  background-color: red;
+  width: 3px;
+  height: 60px;
+}
+.orangeLine {
+  position: absolute;
+  left: 40%;
+  background-color: orange;
+  width: 3px;
   height: 60px;
 }
 .module {
