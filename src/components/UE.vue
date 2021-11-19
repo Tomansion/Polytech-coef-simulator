@@ -8,17 +8,16 @@
           :key="module.name"
           :style="
             'width:' +
-            (module.coef / totalCoef) * 100 +
+            (module.coef / UE.totalCoef) * 100 +
             '%; background-color:' +
             getColorByCoef(module.coef)
           "
           class="module"
         >
           {{ module.name }} : Coef {{ module.coef }} ({{
-            Math.round((module.coef / totalCoef) * 100)
+            Math.round((module.coef / UE.totalCoef) * 100)
           }}%)
         </div>
-        <!-- <div class="totalCoef">Total coef : {{ totalCoef }}</div> -->
       </b-card-text>
       <!-- Grades repartition -->
       <b-card-text class="moduleRep">
@@ -27,14 +26,13 @@
           :key="module.name"
           :style="
             'width:' +
-            (grades[module.name] / 20) * (module.coef / totalCoef) * 100 +
+            (grades[module.name] / 20) * (module.coef / UE.totalCoef) * 100 +
             '%; background-color:' +
             getColorByCoef(module.coef)
           "
           class="module"
         >
           {{ module.name }}
-          <!-- : {{ grades[module.name] }} / 20 -->
         </div>
       </b-card-text>
       <!-- Grades input -->
@@ -47,14 +45,18 @@
             class="moduleGradeInput"
           >
             {{ module.name }} :
-            <input
-              type="number"
-              v-model="grades[module.name]"
-              @input="update"
-              max="20"
-              min="0"
-            />
-            / 20
+            <span style="display: flex; align-items: center">
+              <b-form-input
+                v-model="grades[module.name]"
+                @input="update"
+                type="number"
+                min="0"
+                max="20"
+                step="1"
+              >
+              </b-form-input>
+              / 20
+            </span>
           </div>
         </div>
         <div class="totalCoef">
@@ -77,18 +79,13 @@ export default {
   },
   data() {
     return {
-      totalCoef: null,
       maxGrade: null,
       totalGrade: 0,
       grades: {},
     };
   },
   created() {
-    this.totalCoef = this.UE.modules.reduce(
-      (total, module) => module.coef + total,
-      0
-    );
-    this.maxGrade = 20 * this.totalCoef;
+    this.maxGrade = 20 * this.UE.totalCoef;
 
     // Set all the grades to 20
     this.UE.modules.map((module) => {
@@ -113,6 +110,10 @@ export default {
     },
     update() {
       this.calculateGrade();
+      this.$emit("gradeUpdate", {
+        UE: this.UE.name,
+        grade: this.totalGrade,
+      });
     },
     calculateGrade() {
       this.totalGrade = Object.keys(this.grades).reduce(
