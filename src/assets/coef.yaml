@@ -17,6 +17,12 @@ ue:
         coef: 3
       - name: IA et résolution contraintes
         coef: 4
+  - name: Réseaux
+    modules:
+      - name: Sécurité
+        coef: 5
+      - name: Réseaux avancés
+        coef: 4
   - name: Analyse des Systèmes et des données
     modules:
       - name: Architecture orienté services
