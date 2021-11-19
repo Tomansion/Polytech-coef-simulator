@@ -1,4 +1,4 @@
-# Polytech coef estimator
+# Polytech coef simulator
 
 ![Alt text](images/main.png "How the tool look like")
 

@@ -1,7 +1,7 @@
 {
-  "name": "polytechcoefestimator",
+  "name": "polytechcoefsimulator",
   "version": "0.1.0",
-  "description": "Estimator for the Poylytech Coef",
+  "description": "Simulator for the Poylytech Coef",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
