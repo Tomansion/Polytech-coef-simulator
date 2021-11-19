@@ -4,6 +4,13 @@
 
 ![Alt text](images/main.png "How the tool look like")
 Made with VueJs
+
+```
+git clone git@github.com:Tomansion/Polytech-coef-simulator.git
+```
+```
+cd Polytech-coef-simulator
+```
 ## Setting your own coef
 
 Just change the src/assets/coef.yaml file
@@ -17,17 +24,13 @@ docker build -t polytech_coef_simulator .
 
 ```bash
 # Run
-docker run -it polytech_coef_simulator:latest -p 8080:8080
+docker run -it -p myPort:8080 polytech_coef_simulator:latest
 ```
+replace 'myPort' by your port
 
+add ```-d ```  to run in background
 
 ## Dev setup
-```
-git clone git@github.com:Tomansion/Polytech-coef-simulator.git
-```
-```
-cd Polytech-coef-simulator
-```
 ```
 npm install
 ```
