@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+    <h1>Polytech trivial teaching unit validation simulator</h1>
+    <h2>APP5 Info - 2021 2020 edition</h2>
+
     <!-- Dispay the total grade -->
     <b-card header="Total grade estimation">
       <b-card-text> {{ totalGrade }} / 20 </b-card-text>
